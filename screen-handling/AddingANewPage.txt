@@ -1,0 +1,38 @@
+
+Here are the steps when you are going to add a new page, and the requirements for it:
+
+1) Create the class
+    Go into the page-classes folder, and create a new design form class.  This is the one
+    that has the .cpp, .h, and .ui all tied together.  Make sure you are extending QWidget,
+    and not QMainWindow.  You are going to want to give your class some descriptive name
+    that makes it obvious what that page is for.
+
+2) Get the class ready
+    First: Go into the .ui file, and add at least these two buttons
+      (Class QPushButton) named "prevButton", and "nextButton".  Generally we are placing those
+      in the bottom corners of the page.  Then, set the width of the page to 1000, and the height
+      to 600.  Also change the minWidth and minHeight to the same values or it won't work right.
+    Second: Go into the .h file and add two methods:
+      void getPrevButton();
+      void getNextButton();
+    Third: Go into your .cpp file and implement these two methods.  They should return pointers
+      to your prevButton and nextButton, respectively.  See an existing page-class for an
+      example.
+
+3) Add method to screenhandler.h
+    You'll see in screenhandler.h that there are methods called things like setup[PageNameHere]();
+    Add your own that lines up with the name of your class/page.
+
+4) Add method to screenhandler.cpp
+    Go into screenhandler.cpp.  Copy the ScreenHandler::setupWelcomePage method (the entire thing).
+    Paste it below all the other setup methods, and rename it to the name you gave the method in the
+    .h file.  Then, go up to the top of the .h file and add an #include statement to the .h file you
+    created.  Then, on the first line in the method you copy-pasted, where the page gets instantiated.
+    Change the class name (both occurances on the line) to your class name.
+
+5) Call method in screenhandler.cpp constructor
+    You'll see a set of method calls to the setup methods.  Add yours in here.  Keep in mind: the
+    order they are instantiated is the same order they will appear in as you go through the program.
+
+
+And that's it!  As you run the program, you will see your page pop up after the previous last one.
